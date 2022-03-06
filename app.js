@@ -60,10 +60,12 @@ Dino.prototype.compareDiet = function (human) {
 // Create Dino Compare Method 2
 // NOTE: Weight in JSON file is in lbs, height in inches.
 Dino.prototype.compareHeight = function (human) {
-    if (this.height < human.feet * 12 + human.inches) {
-        return `Wow, you are taller than a ${this.species}!`
+    let human_height = human.feet * 12 + human.inches;
+
+    if (this.height < human_height) {
+        return `You are ${human_height - this.height} inch(es) taller than the ${this.species}.`
     } else if (this.height > human.feet * 12 + human.inches) {
-        return `${this.species} is taller than you!`
+        return `The ${this.species} is ${this.height - human_height} inch(es) taller than you.`
     } else {
         return `Hey, you guys are the same height!`
     }
@@ -74,9 +76,9 @@ Dino.prototype.compareHeight = function (human) {
 // NOTE: Weight in JSON file is in lbs, height in inches.
 Dino.prototype.compareWeight = function (human) {
     if (this.weight < human.weight) {
-        return `Wow, you are heavier than a ${this.species}!`
+        return `You weigh ${human.weight - this.weight} pound(s) more than the ${this.species}.`
     } else if (this.weight > human.weight) {
-        return `${this.species} weighs more than you do!`
+        return `The ${this.species} weighs ${this.weight - human.weight} pound(s) more than you.`
     } else {
         return `Hey, you guys have the same weight!`
     }
@@ -88,10 +90,10 @@ Dino.prototype.getFact = function () {
     return this.fact
 }
 Dino.prototype.getWhen = function () {
-    return `I am from the ${this.when} era`
+    return `${this.species} lived in the ${this.when} era.`
 }
 Dino.prototype.getWhere = function () {
-    return `You can find me in ${this.where}`
+    return `${this.species} could be found in ${this.where}.`
 }
 
 
@@ -105,7 +107,6 @@ function makeHumanTile(human) {
         <div class="grid-item">
             <h3>${human.name}</h3>
             <img src="${human.picture}"></img>
-            <p>Great! You are a human, I think</p>
         </div>
     `
 }
@@ -136,7 +137,7 @@ function makeDinoTile(dino, human) {
         <div class='grid-item'>
             <h3>${dino.species}</h3>
             <img src="${dino.picture}"></img>
-            <p>All birds are living dinosaurs!</p>
+            <p>All birds are living dinosaurs.</p>
 
         </div>
     ` : `
